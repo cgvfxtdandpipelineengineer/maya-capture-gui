@@ -10,17 +10,15 @@ _registered_tokens = dict()
 
 
 def format_tokens(string, options):
-    """
-    Replace the tokens with the correlated strings
+    """Replace the tokens with the correlated strings
 
-    :param string: the filename of the playblast
-    :type string: str
+    Arguments:
+        string (str): filename of the playblast with tokens.
+        options (dict): The parsed capture options.
 
-    :param options: the capture options
-    :type options: dict
+    Returns:
+        str: The formatted filename with all tokens resolved
 
-    :return: the formatted filename with all tokens resolved
-    :rtype: str
     """
 
     if not string:
@@ -52,6 +50,7 @@ def _camera_token(options):
     camera = camera.rsplit("|", 1)[-1]  # use short name
     camera = camera.replace(":", "_")   # namespace `:` to `_`
     return camera
+
 
 register_token("<Camera>", _camera_token,
                label="Insert camera name")

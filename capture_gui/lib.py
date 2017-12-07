@@ -1,4 +1,4 @@
-# TODO: find a solution for fetching Maya main window without shiboken and crashes
+# TODO: fetch Maya main window without shiboken that also doesn't crash
 
 import sys
 import logging
@@ -182,12 +182,11 @@ def get_current_renderlayer():
 
 
 def get_plugin_shapes():
-    """
-    Get all currently available plugin shapes
-    
-    :return: a collection of plugin shapes with their menu name and 
-    program name
-    :rtype: dict
+    """Get all currently available plugin shapes
+
+    Returns:
+        dict: plugin shapes by their menu label and script name
+
     """
     filters = cmds.pluginDisplayFilter(query=True, listFilters=True)
     labels = [cmds.pluginDisplayFilter(f, query=True, label=True) for f in
@@ -261,11 +260,11 @@ def capture_scene(options):
     This ensures playblast is done as quicktime H.264 100% quality.
     It forces showOrnaments to be off and does not render off screen.
 
-    :param options: a collection of output options
-    :type options: dict
+    Arguments:
+        options (dict): a collection of output options
 
-    :returns: Full path to playblast file.
-    :rtype: str 
+    Returns:
+        str: Full path to playblast file.
 
     """
 
@@ -331,9 +330,10 @@ def browse(path=None):
 
 def default_output():
     """Return filename based on current scene name.
-    
-    :returns: A relative filename
-    :rtype: str
+
+    Returns:
+        str: A relative filename
+
     """
 
     scene = get_current_scenename() or "playblast"
@@ -385,9 +385,11 @@ def no_undo():
 
 
 def get_maya_main_window():
-    """
-    Get the main Maya window as a QtGui.QMainWindow instance
-    :return: QtGui.QMainWindow instance of the top level Maya windows
+    """Get the main Maya window as a QtGui.QMainWindow instance
+
+    Returns:
+        QtGui.QMainWindow: instance of the top level Maya windows
+
     """
     ptr = omui.MQtUtil.mainWindow()
     if ptr is not None:

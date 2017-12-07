@@ -22,11 +22,13 @@ class ColorPicker(QtWidgets.QPushButton):
     @color.setter
     def color(self, values):
         """Set the color value and update the stylesheet
-        
-        :param values: the color values; red, green, blue
-        :type values: list
-        
-        :return: None
+
+        Arguments:
+            values (list): the color values; red, green, blue
+
+        Returns:
+            None
+
         """
         self._color = values
         self.valueChanged.emit()
@@ -37,10 +39,11 @@ class ColorPicker(QtWidgets.QPushButton):
     # endregion properties
 
     def show_color_dialog(self):
-        """
-        Display a color picker and after a color has been chosen update
-        the color of the button and its current value 
-        
+        """Display a color picker to change color.
+
+        When a color has been chosen this updates the color of the button
+        and its current value
+
         :return: the red, green and blue values
         :rtype: list
         """

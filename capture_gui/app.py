@@ -27,8 +27,7 @@ class ClickLabel(QtWidgets.QLabel):
 
 
 class PreviewWidget(QtWidgets.QWidget):
-    """
-    The playblast image preview widget.
+    """The playblast image preview widget.
 
     Upon refresh it will retrieve the options through the function set as
     `options_getter` and make a call to `capture.capture()` for a single
@@ -114,7 +113,7 @@ class PreviewWidget(QtWidgets.QWidget):
 class PresetWidget(QtWidgets.QWidget):
     """Preset Widget
 
-    Allows the user to set preferences and create presets to load before 
+    Allows the user to set preferences and create presets to load before
     capturing.
 
     """
@@ -183,9 +182,11 @@ class PresetWidget(QtWidgets.QWidget):
         self._process_presets()
 
     def _process_presets(self):
-        """
-        Make sure all registered self.presets are visible in the plugin
-        :return: None
+        """Adds all preset files from preset paths to the Preset widget.
+
+        Returns:
+            None
+
         """
         for presetfile in presets.discover():
             self.add_preset(presetfile)
@@ -195,10 +196,9 @@ class PresetWidget(QtWidgets.QWidget):
 
         path = self._default_browse_path()
         filters = "Text file (*.json)"
-        filename, _ = QtWidgets.QFileDialog.getOpenFileName(self,
-                                                            "Open preference file",
-                                                            path,
-                                                            filters)
+        dialog = QtWidgets.QFileDialog
+        filename, _ = dialog.getOpenFileName(self, "Open preference file",
+                                             path, filters)
         if not filename:
             return
 
@@ -210,9 +210,10 @@ class PresetWidget(QtWidgets.QWidget):
 
     def load_active_preset(self):
         """Load the active preset.
-        
-        :return: collection of preset inputs
-        :rtype: dict
+
+        Returns:
+            dict: The preset inputs.
+
         """
         current_index = self.presets.currentIndex()
         filename = self.presets.itemData(current_index)
@@ -234,13 +235,13 @@ class PresetWidget(QtWidgets.QWidget):
         return preset
 
     def add_preset(self, filename):
-        """
-        Add the filename to the preset list and set the index to the filename
-        
-        :param filename: the filename of the preset loaded
-        :type filename: str
-        
-        :return: None 
+        """Add the filename to the preset list.
+
+        This also sets the index to the filename.
+
+        Returns:
+            None
+
         """
 
         filename = os.path.normpath(filename)
@@ -268,13 +269,13 @@ class PresetWidget(QtWidgets.QWidget):
 
     def _default_browse_path(self):
         """Return the current browse path for save/load preset.
-        
+
         If a preset is currently loaded it will use that specific path
         otherwise it will go to the last registered preset path.
-        
-        :return: Path to use as default browse location.
-        :rtype: str
-        
+
+        Returns:
+            str: Path to use as default browse location.
+
         """
 
         current_index = self.presets.currentIndex()
@@ -345,9 +346,7 @@ class PresetWidget(QtWidgets.QWidget):
 
 
 class App(QtWidgets.QWidget):
-    """
-    The main application in which the widgets are placed
-    """
+    """The main application in which the widgets are placed"""
 
     # Signals
     options_changed = QtCore.Signal(dict)
@@ -474,10 +473,12 @@ class App(QtWidgets.QWidget):
     def apply_inputs(self, inputs):
         """Apply all the settings of the widgets.
 
-        :param inputs: collection of input values based on the GUI
-        :type inputs: dict
+        Arguments:
+            inputs (dict): input values per plug-in widget
 
-        :return: None 
+        Returns:
+            None
+
         """
         if not inputs:
             return
@@ -532,11 +533,11 @@ class App(QtWidgets.QWidget):
             layout.addWidget(group_widget)
 
     def validate(self):
-        """
-        Check if the outputs of the widgets are good
-        
-        :return: True or False
-        :rtype: bool
+        """Validate whether the outputs of the widgets are good.
+
+        Returns:
+            bool: Whether it's valid to capture the current settings.
+
         """
 
         errors = list()
@@ -557,11 +558,11 @@ class App(QtWidgets.QWidget):
         return True
 
     def get_outputs(self):
-        """
-        Return the settings for a capture as currently set in the  Application.
+        """Return settings for a capture as currently set in the Application.
 
-        :return: a collection of settings
-        :rtype: dict
+        Returns:
+            dict: Current output settings
+
         """
 
         # Get settings from widgets
@@ -585,8 +586,9 @@ class App(QtWidgets.QWidget):
     def get_inputs(self, as_preset=False):
         """Return the inputs per plug-in widgets by `plugin.id`.
 
-        :returns: The inputs per widget
-        :rtype: dict
+        Returns:
+            dict: The inputs per widget
+
         """
 
         inputs = dict()
@@ -627,9 +629,10 @@ class App(QtWidgets.QWidget):
 
     def _ensure_config_exist(self):
         """Create the configuration file if it does not exist yet.
-        
-        :return: filepath of the configuration file
-        :rtype: unicode
+
+        Returns:
+            unicode: filepath of the configuration file
+
         """
 
         userdir = os.path.expanduser("~")
@@ -675,9 +678,10 @@ class App(QtWidgets.QWidget):
 
     def _get_plugin_widgets(self):
         """List all plug-in widgets.
-        
-        :return: The plug-in widgets in *all* sections
-        :rtype: list
+
+        Returns:
+            list: The plug-in widgets in *all* sections
+
         """
 
         widgets = list()
