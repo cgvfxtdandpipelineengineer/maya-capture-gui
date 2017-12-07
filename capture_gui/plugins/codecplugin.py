@@ -69,11 +69,11 @@ class CodecPlugin(capture_gui.plugin.Plugin):
         self.compression.addItems(compressions)
 
     def get_outputs(self):
-        """
-        Get all the options from the widget
+        """Get the plugin outputs that matches `capture.capture` arguments
 
-        :return: dictionary with the settings
-        :rtype: dict
+        Returns:
+            dict: Plugin outputs
+
         """
 
         return {"format": self.format.currentText(),

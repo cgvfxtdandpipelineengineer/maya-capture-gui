@@ -5,7 +5,6 @@ import capture
 
 
 class ViewportPlugin(capture_gui.plugin.Plugin):
-
     """Plugin to apply viewport visibilities and settings"""
 
     id = "Viewport Options"
@@ -86,14 +85,16 @@ class ViewportPlugin(capture_gui.plugin.Plugin):
         self.two_sided_ligthing.stateChanged.connect(self.options_changed)
         self.shadows.stateChanged.connect(self.options_changed)
 
-        self.display_light_menu.currentIndexChanged.connect(self.options_changed)
+        self.display_light_menu.currentIndexChanged.connect(
+            self.options_changed
+        )
 
     def _build_show_menu(self):
         """Build the menu to select which object types are shown in the output.
-        
+
         Returns:
             QtGui.QMenu: The visibilities "show" menu.
-            
+
         """
 
         menu = QtWidgets.QMenu(self)
@@ -125,11 +126,14 @@ class ViewportPlugin(capture_gui.plugin.Plugin):
         return menu
 
     def _build_light_menu(self):
-        """
+        """Build lighting menu.
+
         Create the menu items for the different types of lighting for
         in the viewport
-        
-        :return: None 
+
+        Returns:
+            None
+
         """
 
         menu = QtWidgets.QComboBox(self)
@@ -166,11 +170,11 @@ class ViewportPlugin(capture_gui.plugin.Plugin):
             action.setChecked(False)
 
     def get_show_inputs(self):
-        """
-        Return checked state of show menu items
-        
-        :return: collection of which shape is checked
-        :rtype: dict
+        """Return checked state of show menu items
+
+        Returns:
+            dict: The checked show states in the widget.
+
         """
 
         show_inputs = {}
@@ -185,11 +189,11 @@ class ViewportPlugin(capture_gui.plugin.Plugin):
         return show_inputs
 
     def get_displaylights(self):
-        """
-        Get the currently selected displayLight
-        
-        :return: the system name of the selected displayLight
-        :rtype: dict
+        """Get and parse the currently selected displayLights options.
+
+        Returns:
+            dict: The display light options
+
         """
         indx = self.display_light_menu.currentIndex()
         return {"displayLights": self.display_light_menu.itemData(indx),
@@ -197,15 +201,11 @@ class ViewportPlugin(capture_gui.plugin.Plugin):
                 "twoSidedLighting": self.two_sided_ligthing.isChecked()}
 
     def get_inputs(self, as_preset):
-        """
-        Return the widget options
-        
-        :param as_preset: Optional, set to True to retrieve it as a preset 
-        input
-        :type as_preset: bool
-        
-        :return: collection with all the settings of the widgets
-        :rtype: dict
+        """Return the widget options
+
+        Returns:
+            dict: The input settings of the widgets.
+
         """
         inputs = {"high_quality": self.high_quality.isChecked(),
                   "override_viewport_options": self.override_viewport.isChecked(),
@@ -218,13 +218,11 @@ class ViewportPlugin(capture_gui.plugin.Plugin):
         return inputs
 
     def apply_inputs(self, inputs):
-        """
-        Apply the settings which can be adjust by the user or presets
-        
-        :param inputs: a collection of settings
-        :type inputs: dict
+        """Apply the saved inputs from the inputs configuration
 
-        :return: None
+        Arguments:
+            settings (dict): The input settings to apply.
+
         """
 
         # get input values directly from input given
@@ -249,13 +247,12 @@ class ViewportPlugin(capture_gui.plugin.Plugin):
             action.setChecked(state)
 
     def get_outputs(self):
-        """
-        Retrieve all settings of each available sub widgets
-        
-        :return: collection of output settings for the viewport 
-        :rtype: dict
-        """
+        """Get the plugin outputs that matches `capture.capture` arguments
 
+        Returns:
+            dict: Plugin outputs
+
+        """
         outputs = dict()
 
         high_quality = self.high_quality.isChecked()

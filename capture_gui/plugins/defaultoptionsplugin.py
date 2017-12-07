@@ -3,22 +3,24 @@ import capture_gui.plugin
 
 
 class DefaultOptionsPlugin(capture_gui.plugin.Plugin):
-    """Invisible Plugin that supplies a set of constant default values to the gui.
-    
+    """Invisible Plugin that supplies some default values to the gui.
+
     This enures:
         - no HUD is present in playblasts
         - no overscan (`overscan` set to 1.0)
         - no title safe, action safe, gate mask, etc.
         - active sound is included in video playblasts
-    
+
     """
     order = -1
     hidden = True
 
     def get_outputs(self):
-        """
-        Retrieve all settings of each available sub widgets
-        :return: 
+        """Get the plugin outputs that matches `capture.capture` arguments
+
+        Returns:
+            dict: Plugin outputs
+
         """
 
         outputs = dict()

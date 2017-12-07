@@ -43,10 +43,11 @@ class GenericPlugin(capture_gui.plugin.Plugin):
         }
 
     def get_inputs(self, as_preset):
-        """
-        Return the widget options
-        :param as_preset: 
-        :return: dictionary with all the settings of the widgets 
+        """Return the widget options
+
+        Returns:
+            dict: The input settings of the widgets.
+
         """
 
         inputs = dict()
@@ -57,13 +58,11 @@ class GenericPlugin(capture_gui.plugin.Plugin):
         return inputs
 
     def apply_inputs(self, inputs):
-        """
-        Apply the settings which can be adjust by the user or presets
+        """Apply the saved inputs from the inputs configuration
 
-        :param inputs: a collection of settings
-        :type inputs: dict
+        Arguments:
+            inputs (dict): The input settings to apply.
 
-        :return: None
         """
 
         for key, widget in self.widgets.items():
@@ -74,9 +73,10 @@ class GenericPlugin(capture_gui.plugin.Plugin):
         return inputs
 
     def get_outputs(self):
-        """
-        Retrieve all settings of each available sub widgets
-        :return: 
+        """Returns all the options from the widget
+
+        Returns: dictionary with the settings
+
         """
 
         inputs = self.get_inputs(as_preset=False)

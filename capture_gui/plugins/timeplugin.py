@@ -135,13 +135,14 @@ class TimePlugin(capture_gui.plugin.Plugin):
         self.end.setValue(max(self.end.value(), value))
 
     def on_mode_changed(self, emit=True):
-        """
-        Update the GUI when the user updated the time range or settings
+        """Update the GUI when the user updated the time range or settings.
 
-        :param emit: Whether to emit the options changed signal
-        :type emit: bool
+        Arguments:
+            emit (bool): Whether to emit the options changed signal
 
-        :return: None 
+        Returns:
+            None
+
         """
 
         mode = self.mode.currentText()
@@ -203,13 +204,11 @@ class TimePlugin(capture_gui.plugin.Plugin):
         return errors
 
     def get_outputs(self, panel=""):
-        """
-        Get the options of the Time Widget
-        :param panel: name of the panel
-        :type panel: str
-        
-        :return: the settings in a dictionary
-        :rtype: dict
+        """Get the plugin outputs that matches `capture.capture` arguments
+
+        Returns:
+            dict: Plugin outputs
+
         """
 
         mode = self.mode.currentText()
@@ -266,10 +265,11 @@ class TimePlugin(capture_gui.plugin.Plugin):
         self._remove_callbacks()
 
     def _register_callbacks(self):
-        """
+        """Register maya time and playback range change callbacks.
+
         Register callbacks to ensure Capture GUI reacts to changes in
         the Maya GUI in regards to time slider and current frame
-        :return: None
+
         """
 
         callback = lambda x: self.on_mode_changed(emit=False)

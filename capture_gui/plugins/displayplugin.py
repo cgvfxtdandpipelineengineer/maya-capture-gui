@@ -30,7 +30,6 @@ LABELS = {"background": "Background",
 
 
 class DisplayPlugin(capture_gui.plugin.Plugin):
-
     """Plugin to apply viewport visibilities and settings"""
 
     id = "Display Options"
@@ -74,18 +73,15 @@ class DisplayPlugin(capture_gui.plugin.Plugin):
 
     def add_color_picker(self, layout, label, default):
         """Create a column with a label and a button to select a color
-        
-        :param layout: the layout to add the color picket too
-        :type layout: QtWidgets.QLayout
-        
-        :param label: the system name for the color type, e.g. : backgroundTop
-        :type label: str
-        
-        :param default: the default color combination to start with
-        :type default: list
-        
-        :return: a color picker instance
-        :rtype: colorpicker.ColorPicker
+
+        Arguments:
+            layout (QtWidgets.QLayout): Layout to add color picker to
+            label (str): system name for the color type, e.g. : backgroundTop
+            default (list): The default color values to start with
+
+        Returns:
+            colorpicker.ColorPicker: a color picker instance
+
         """
 
         column = QtWidgets.QVBoxLayout()
@@ -110,11 +106,14 @@ class DisplayPlugin(capture_gui.plugin.Plugin):
         return color_picker
 
     def on_toggle_override(self):
-        """
+        """Callback when override is toggled.
+
         Enable or disable the color pickers and background type widgets bases
         on the current state of the override checkbox
-        
-        :return: None
+
+        Returns:
+            None
+
         """
         state = self.override.isChecked()
         self.display_type.setEnabled(state)
@@ -122,21 +121,23 @@ class DisplayPlugin(capture_gui.plugin.Plugin):
             widget.setEnabled(state)
 
     def display_gradient(self):
-        """
-        Returns whether the background should be displayed as gradient or 
-        solid color. When True the colors will use the top and bottom color to 
-        define the gradient otherwise the background color will be used as 
-        solid color.
+        """Return whether the background should be displayed as gradient.
+
+        When True the colors will use the top and bottom color to define the
+        gradient otherwise the background color will be used as solid color.
+
+        Returns:
+            bool: Whether background is gradient
+
         """
         return self.display_type.currentText() == "Gradient"
 
     def apply_inputs(self, settings):
         """Apply the saved inputs from the inputs configuration
-        
-        :param settings: collection of input settings
-        :type settings: dict
-        
-        :return: None 
+
+        Arguments:
+            settings (dict): The input settings to apply.
+
         """
 
         for label, widget in self._colors.items():
@@ -155,6 +156,13 @@ class DisplayPlugin(capture_gui.plugin.Plugin):
         return inputs
 
     def get_outputs(self):
+        """Get the plugin outputs that matches `capture.capture` arguments
+
+        Returns:
+            dict: Plugin outputs
+
+        """
+
         outputs = {}
         if self.override.isChecked():
             outputs["displayGradient"] = self.display_gradient()

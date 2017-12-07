@@ -36,10 +36,10 @@ class RendererPlugin(capture_gui.plugin.Plugin):
 
     def get_current_renderer(self):
         """Get current renderer by internal name (non-UI)
-        
+
         Returns:
             str: Name of renderer.
-            
+
         """
         renderer_ui = self.renderers.currentText()
         renderer = self._renderers.get(renderer_ui, None)
@@ -71,10 +71,10 @@ class RendererPlugin(capture_gui.plugin.Plugin):
 
     def get_outputs(self):
         """Get the plugin outputs that matches `capture.capture` arguments
-        
+
         Returns:
             dict: Plugin outputs
-            
+
         """
         return {
             "viewport_options": {
@@ -83,15 +83,14 @@ class RendererPlugin(capture_gui.plugin.Plugin):
         }
 
     def apply_inputs(self, inputs):
-        """
-        Apply previous settings or settings from a preset
+        """Apply previous settings or settings from a preset
 
         Args:
             inputs (dict): Plugin input settings
 
         Returns:
             None
-            
+
         """
 
         reverse_lookup = {value: key for key, value in self._renderers.items()}

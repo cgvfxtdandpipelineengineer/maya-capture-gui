@@ -121,7 +121,7 @@ class IoPlugin(plugin.Plugin):
 
     def show_browse_dialog(self):
         """Set the filepath using a browser dialog.
-        
+
         :return: None
         """
 
@@ -138,11 +138,11 @@ class IoPlugin(plugin.Plugin):
     def add_playblast(self, item):
         """
         Add an item to the previous playblast menu
-        
+
         :param item: full path to a playblast file
         :type item: str
-        
-        :return: None 
+
+        :return: None
         """
 
         # If item already in the recent playblasts remove it so we are
@@ -174,11 +174,11 @@ class IoPlugin(plugin.Plugin):
         self.add_playblast(playblast_file)
 
     def get_outputs(self):
-        """
-        Get the output of the widget based on the user's inputs
-        
-        :return: collection of needed output values
-        :rtype: dict
+        """Get the plugin outputs that matches `capture.capture` arguments
+
+        Returns:
+            dict: Plugin outputs
+
         """
 
         output = {"filename": None,
@@ -231,7 +231,7 @@ class IoPlugin(plugin.Plugin):
     def token_menu(self):
         """
         Build the token menu based on the registered tokens
-        
+
         :returns: Menu
         :rtype: QtWidgets.QMenu
         """
