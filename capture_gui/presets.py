@@ -74,6 +74,10 @@ def preset_paths():
         # filter duplicates
         if path in paths:
             continue
+
+        if not os.path.exists(path):
+            continue
+
         paths.append(path)
 
     return paths
