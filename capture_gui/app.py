@@ -327,9 +327,17 @@ class PresetWidget(QtWidgets.QWidget):
         path = settings.get("selected", None)
         index = self.presets.findData(path)
         if index == -1:
-            log.warning("Previously selected preset is not "
-                        "available: {}".format(path))
-            index = 0
+            # If the last loaded preset still exists but wasn't on the
+            # "discovered preset paths" then add it.
+            if os.path.exists(path):
+                log.info("Adding previously selected preset explicitly: %s",
+                         path)
+                self.add_preset(path)
+                return
+            else:
+                log.warning("Previously selected preset is not available: %s",
+                            path)
+                index = 0
 
         self.presets.setCurrentIndex(index)
 
